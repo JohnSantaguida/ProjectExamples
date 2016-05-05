@@ -1,3 +1,6 @@
+# Author: Dillon Koval
+
+
 import scipy
 import numpy
 from sklearn import linear_model
@@ -107,10 +110,6 @@ def load_gasprices():
 	startMonth = endMonth
 	startPrice = price
     
-    
-
-    for entry in GasPriceChange:
-	print(entry)
     return GasPriceChange
 
     
@@ -128,7 +127,7 @@ def createOutput(TempAndGasChange):
     for i in range(0, len(TempAndGasChange)):
 	if TempAndGasChange[i][4] > 0:
 	    Y[i] = 1
-    #print 'Number of gas increases over a month time', sum(Y)
+    print 'Number of gas increases over a month time', sum(Y)
     return Y
 
 def createBaseline(USTemp_Change):
@@ -164,10 +163,10 @@ def test_classifier(clf, X, Y):
 	clf.fit(X[train], Y[train])
 	prediction = clf.predict_proba(X[test])
 	aucs.append(roc_auc_score(Y[test], prediction[:,1]))
-    #print clf.__class__.__name__, aucs, numpy.mean(aucs)
+    print clf.__class__.__name__, aucs, numpy.mean(aucs)
 
 def main():
-    #print("Started main")
+    
     USTemp_Change = load_temps()
     GasPrice_Change = load_gasprices()
     TempAndGasChange = combineData(USTemp_Change, GasPrice_Change)
@@ -178,13 +177,13 @@ def main():
     Y = createOutput(TempAndGasChange)
    
     clf = linear_model.SGDClassifier(loss='log')
-    #test_classifier(clf, X, Y)
+    test_classifier(clf, X, Y)
 
     clf = GaussianNB()
-    #test_classifier(clf, X, Y)
+    test_classifier(clf, X, Y)
 
     clf = RandomForestClassifier(n_estimators=10, max_depth=10)
-    #test_classifier(clf, X, Y)
+    test_classifier(clf, X, Y)
     
     
 

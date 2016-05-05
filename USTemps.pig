@@ -1,3 +1,5 @@
+
+
 GlobalTemps = load 'tempcountry' using PigStorage(',') AS
 	 (date: chararray, AverageTemperature: double, Uncertainty: double, Country: chararray);
 
