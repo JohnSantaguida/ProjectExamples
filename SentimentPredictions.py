@@ -9,7 +9,7 @@ from sklearn.cross_validation import StratifiedKFold
 
 # year, month, day, AverageTemperature, AverageTermperatureUncertainty, State, Country
 def load_news():
-    f = open('')
+    f = open('hdfs:///user/brewereg/fpout/sentiment_data')
     lines = f.readlines()
     f.close()
 
